@@ -11,7 +11,14 @@
                   "source": "!(*.js|*.css|*.html|*.png|*.jpg|*.jpeg|*.gif|*.svg|*.ico)",
                   "destination": "/index.html"
               }
-      ]
+      ],
+      "headers": [ {
+        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "headers": [ {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        } ]
+      } ]
     }
   }
   
