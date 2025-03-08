@@ -5,7 +5,7 @@ export const environment = {
   firebaseConfig: {
 
     apiKey: "AIzaSyCrr0Xv0quvngR1rb-dBshxhifYKyjybXw",
-  
+
     authDomain: "performanceanalyzer-be32e.firebaseapp.com",
   
     projectId: "performanceanalyzer-be32e",
@@ -14,8 +14,9 @@ export const environment = {
   
     messagingSenderId: "961924233583",
   
-    appId: "1:961924233583:web:db090c39da1f079b5b109a",
+    appId: "1:961924233583:web:52144ce1a47bab525b109a",
   
-    measurementId: "G-FFBZSKVZ6K"
+    measurementId: "G-3XEFJB5N2L"
+  
   }
-};
+};  
