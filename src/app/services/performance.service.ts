@@ -5,7 +5,7 @@ import { PerformanceResult } from '../shared/models/performance-result';
 
 @Injectable({ providedIn: 'root' })
 export class PerformanceService {
-    private apiUrl = 'https://performanceanalyzer-be32e.web.app/api/performance';
+    private apiUrl = 'https://performanceanalyzerapi-dzacgmhzfgdjaxh6.canadacentral-01.azurewebsites.net/api/performance';
 
     constructor(private http: HttpClient) { }
 
