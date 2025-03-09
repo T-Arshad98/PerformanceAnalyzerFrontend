@@ -5,13 +5,17 @@
   <div class="alert alert-info" *ngIf="isLoading">
     {{ loadingMessage }}
   </div>
+  
+<!-- Error Message -->
+<div class="alert alert-danger" *ngIf="errorMessage && !isLoading">
+  {{ errorMessage }}
+</div>
 
-  <!-- Analyze Form -->
-  <div class="mb-3" *ngIf="!isLoading">
-    <input class="form-control" [(ngModel)]="url" placeholder="Enter URL (e.g., https://example.com)"
-      [disabled]="isLoading" />
-    <button class="btn btn-primary mt-2" (click)="analyze()" [disabled]="isLoading">Analyze</button>
-  </div>
+<!-- Analyze Form (Hidden during loading) -->
+<div class="mb-3" *ngIf="!isLoading">
+  <input class="form-control" [(ngModel)]="url" placeholder="Enter URL (e.g., https://example.com)" [disabled]="isLoading" />
+  <button class="btn btn-primary mt-2" (click)="analyze()" [disabled]="isLoading">Analyze</button>
+</div>
 
   <!-- Latest Analysis Result -->
   <div class="card mb-4" *ngIf="latestResult && !isLoading">

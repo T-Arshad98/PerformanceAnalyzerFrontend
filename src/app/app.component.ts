@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
     latestResult: PerformanceResult | null = null;
     isLoading = true; // Track database availability
     loadingMessage = 'Waiting for database response...';
+    errorMessage = ''; // Store error messages
 
     constructor(private performanceService: PerformanceService) { }
 
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
     }
 
     pollDatabase() {
-         interval(1000).pipe(
+        interval(1000).pipe(
             switchMap(() => this.performanceService.getResults()),
             takeWhile((data, index) => {
                 if (data) {
@@ -38,26 +39,34 @@ export class AppComponent implements OnInit {
                 this.loadingMessage = `Waiting for database response... (Attempt ${index + 1})`;
                 return true;
             }, true)
-         )
-         .subscribe({
-            error: (err) =>  console.error('Error fetching results:', err)
-         });    
+        )
+            .subscribe({
+                error: (err) => {
+                    this.errorMessage = err.message;
+                    this.loadingMessage = 'Retrying...';
+                }
+            });
     }
 
     getResults() {
         this.performanceService.getResults().subscribe({
-            next: (data) => this.results = data,
-            error: (err) => console.error('Error fetching results:', err)
+            next: (data) => {
+                this.results = data;
+                this.errorMessage = '';
+            },
+            error: (err) => this.errorMessage = err.message
         });
     }
+    
     analyze() {
+        this.errorMessage = '';
         this.performanceService.analyzeWebsite(this.url).subscribe({
             next: (result) => {
-                this.latestResult = result; // Store latest result
+                this.latestResult = result;
                 this.url = '';
-                this.getResults(); // Refresh full list
+                this.getResults();
             },
-            error: (err) => console.error('Analyze error:', err)
+            error: (err) => this.errorMessage = err.message
         });
     }
 }
