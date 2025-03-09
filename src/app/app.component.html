@@ -1,8 +1,22 @@
 <div class="container mt-4">
   <h1>Website Performance Analyzer</h1>
+  <!-- Analyze Form -->
   <div class="mb-3">
-      <input class="form-control" [(ngModel)]="url" placeholder="Enter URL (e.g., https://example.com)" />
-      <button class="btn btn-primary mt-2" (click)="analyze()">Analyze</button>
+    <input class="form-control" [(ngModel)]="url" placeholder="Enter URL (e.g., https://example.com)" />
+    <button class="btn btn-primary mt-2" (click)="analyze()">Analyze</button>
   </div>
 
+  <!-- Latest Analysis Result -->
+  <div class="card mb-4" *ngIf="latestResult">
+    <div class="card-header">Latest Analysis Result</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ latestResult.url }}</h5>
+      <p class="card-text">
+        Load Time: {{ latestResult.loadTime | number:'1.2-2' }} seconds<br>
+        Resource Count: {{ latestResult.resourceCount }}<br>
+        Total Size: {{ latestResult.totalSize | number }} bytes<br>
+        Analyzed At: {{ latestResult.analyzedAt | date:'medium' }}
+      </p>
+    </div>
+  </div>
 </div>
